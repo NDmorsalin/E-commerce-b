@@ -1,56 +1,61 @@
-//external dependency
-//const mongoose= require('mongoose')
-const Product = require('../../model/productModel')
-const getAllProducts = async (req, res, next)=> {
+/* eslint-disable no-unused-vars */
+// external dependency
+// const mongoose= require('mongoose')
+const Product = require('../../model/productModel');
 
-  res.status(300).json({
-    status: 'success', title: 'getAllProducts',
+const getAllProducts = async (req, res, next) => {
+    const product = await Product.find();
+    res.status(300).json({
+        status: 'success',
+        product,
+    });
+};
 
-  })
-}
-const getSingleProduct = async (req, res, next)=> {
+const getSingleProduct = async (req, res, next) => {
+    console.log(req.params.id);
+    const product = await Product.findById(req.params.id);
+    res.status(300).json({
+        status: 'success',
+        product,
+    });
+};
 
-  res.status(300).json({
-    status: 'success', title: 'getSingleProduct'
+// Admin
+const addNewProduct = async (req, res, next) => {
+    const product = new Product({
+        name: req.body.name,
+        description: req.body.description,
+        categories: req.body.categories,
+        pricing: req.body.pricing,
+    });
+    await product.save();
+    res.status(300).json({
+        status: 'success',
+        title: 'addNewProduct,',
+        product,
+    });
+};
 
-  })
-}
-const addNewProduct = async (req, res, next)=> {
+// Admin
+const updateProduct = async (req, res, next) => {
+    res.status(300).json({
+        status: 'success',
+        title: 'updateProduct,',
+    });
+};
 
-  const product = new Product({
-    name: req.body.name,
-    description: req.body.description,
-    categories: req.body.categories,
-    pricing: req.body.pricing
-  })
-  await product.save()
-  res.status(300).json({
-    status: 'success',
-    title: 'addNewProduct,',
-    product
-  })
-}
-const updateProduct = async (req, res, next)=> {
-
-  res.status(300).json({
-    status: 'success',
-    title: 'updateProduct,'
-  })
-}
-const deleteProduct = async (req, res, next)=> {
-
-  res.status(300).json({
-    status: 'success',
-    title: 'deleteProduct'
-  })
-}
-
-
+// Admin
+const deleteProduct = async (req, res, next) => {
+    res.status(300).json({
+        status: 'success',
+        title: 'deleteProduct',
+    });
+};
 
 module.exports = {
-  getAllProducts,
-  getSingleProduct,
-  addNewProduct,
-  updateProduct,
-  deleteProduct
-}
+    getAllProducts,
+    getSingleProduct,
+    addNewProduct,
+    updateProduct,
+    deleteProduct,
+};
