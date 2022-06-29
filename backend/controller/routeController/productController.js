@@ -25,13 +25,13 @@ const addNewProduct = async (req, res, next) => {
     const product = new Product({
         name: req.body.name,
         description: req.body.description,
-        categories: req.body.categories,
-        pricing: req.body.pricing,
+        category: req.body.category,
+        price: req.body.price,
+        images: req.body.images,
     });
     await product.save();
     res.status(300).json({
         status: 'success',
-        title: 'addNewProduct,',
         product,
     });
 };
