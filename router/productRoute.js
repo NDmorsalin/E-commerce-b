@@ -1,4 +1,6 @@
 const express = require('express');
+const productValidator = require('../middlewair/product/productValidation')
+
 const {
     getAllProducts,
     getSingleProduct,
