@@ -24,12 +24,17 @@ const productValidatiorError = async (req, res, next)=> {
   const mappedError = error.mapped()
 
   console.log(mappedError)
-  if (Object.keys(mappedErrors).length === 0) {
+  if (Object.keys(mappedError).length === 0) {
     next()
   } else {
     console.log(mappedError)
     res.status(401).json({
-      error: mappedErrors,
+      error: mappedError,
     });
   }
+}
+
+module.exports = {
+  productValidatiorError,
+  productValidatior
 }
