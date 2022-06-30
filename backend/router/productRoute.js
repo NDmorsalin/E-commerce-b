@@ -1,23 +1,27 @@
 const express = require('express');
 const {
-  productValidatiorError,
-  productValidatior
-} = require('../middleware/product/productMiddleware.js')
+    productValidation,
+    productValidationError,
+} = require('../middleware/product/productMiddleware');
 
 const {
-  getAllProducts,
-  getSingleProduct,
-  addNewProduct,
-  updateProduct,
-  deleteProduct,
+    getAllProducts,
+    getSingleProduct,
+    addNewProduct,
+    updateProduct,
+    deleteSingleProduct,
+    deleteAllProduct,
 } = require('../controller/routeController/productController');
 
 const route = express.Router();
 
 route.get('/product', getAllProducts);
 route.get('/product/:id', getSingleProduct);
-route.post('/product/', productValidatior, productValidatiorError, addNewProduct);
+
+// Admin
+route.post('/product/', productValidation, productValidationError, addNewProduct);
 route.put('/product/:id', updateProduct);
-route.delete('/product/:id', deleteProduct);
+route.delete('/product/:id', deleteSingleProduct);
+route.delete('/product', deleteAllProduct);
 
 module.exports = route;

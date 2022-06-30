@@ -4,52 +4,134 @@
 const Product = require('../../model/productModel');
 
 const getAllProducts = async (req, res, next) => {
-    const product = await Product.find();
-    res.status(300).json({
-        status: 'success',
-        product,
-    });
+    try {
+        const product = await Product.find();
+        res.status(300).json({
+            status: 'success',
+            product,
+        });
+    } catch (error) {
+        res.status(500).json({
+            error: {
+                common: {
+                    msg: error.message,
+                },
+            },
+        });
+    }
 };
 
 const getSingleProduct = async (req, res, next) => {
-    console.log(req.params.id);
-    const product = await Product.findById(req.params.id);
-    res.status(300).json({
-        status: 'success',
-        product,
-    });
+    try {
+        const product = await Product.findById(req.params.id);
+        res.status(300).json({
+            status: 'success',
+            product,
+        });
+    } catch (error) {
+        res.status(500).json({
+            error: {
+                common: {
+                    msg: error.message,
+                },
+            },
+        });
+    }
 };
 
 // Admin
 const addNewProduct = async (req, res, next) => {
-    const product = new Product({
-        name: req.body.name,
-        description: req.body.description,
-        category: req.body.category,
-        price: req.body.price,
-        images: req.body.images,
-    });
-    await product.save();
-    res.status(300).json({
-        status: 'success',
-        product,
-    });
+    try {
+        const product = new Product({
+            name: req.body.name,
+            description: req.body.description,
+            category: req.body.category,
+            price: req.body.price,
+            images: req.body.images,
+        });
+        await product.save();
+        res.status(300).json({
+            status: 'success',
+            product,
+        });
+    } catch (error) {
+        res.status(500).json({
+            error: {
+                common: {
+                    msg: error.message,
+                },
+            },
+        });
+    }
 };
 
 // Admin
 const updateProduct = async (req, res, next) => {
-    res.status(300).json({
-        status: 'success',
-        title: 'updateProduct,',
-    });
+    try {
+        const { id } = req.params;
+        const updatedProduct = await Product.findByIdAndUpdate(
+            id,
+            {
+                $set: {
+                    name: req.body.name,
+                    description: req.body.description,
+                    category: req.body.category,
+                    price: req.body.price,
+                    images: req.body.images,
+                },
+            },
+            { new: true }
+        );
+        res.status(300).json({
+            status: 'success',
+            updatedProduct,
+        });
+    } catch (error) {
+        res.status(500).json({
+            error: {
+                common: {
+                    msg: error.message,
+                },
+            },
+        });
+    }
 };
 
 // Admin
-const deleteProduct = async (req, res, next) => {
-    res.status(300).json({
-        status: 'success',
-        title: 'deleteProduct',
-    });
+const deleteSingleProduct = async (req, res, next) => {
+    try {
+        const deletedProduct = await Product.findByIdAndDelete(req.params.id);
+        res.status(200).json({
+            status: 'successfully deleted one product',
+            deletedProduct,
+        });
+    } catch (error) {
+        res.status(500).json({
+            error: {
+                common: {
+                    msg: error.message,
+                },
+            },
+        });
+    }
+};
+// Admin
+const deleteAllProduct = async (req, res, next) => {
+    try {
+        const deleteAllProducts = await Product.deleteMany();
+        res.status(300).json({
+            status: 'successfully deleted All products',
+            deleteAllProducts,
+        });
+    } catch (error) {
+        res.status(500).json({
+            error: {
+                common: {
+                    msg: error.message,
+                },
+            },
+        });
+    }
 };
 
 module.exports = {
@@ -57,5 +139,6 @@ module.exports = {
     getSingleProduct,
     addNewProduct,
     updateProduct,
-    deleteProduct,
+    deleteSingleProduct,
+    deleteAllProduct,
 };
