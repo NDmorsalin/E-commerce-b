@@ -28,8 +28,8 @@ const productValidation = [
         .withMessage('price is not more then 8 digits'),
 ];
 
-const productValidationError = async (req, res, next) => {
-    const error = await validationResult(req);
+const productValidationError = (req, res, next) => {
+    const error = validationResult(req);
     const mappedError = error.mapped();
 
     console.log(mappedError);

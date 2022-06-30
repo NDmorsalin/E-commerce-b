@@ -3,6 +3,7 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 // internal route
 const productRoute = require('./router/productRoute');
+const userRoute = require('./router/userRoute');
 const db = require('./DB/db');
 
 const app = express();
@@ -11,12 +12,13 @@ require('dotenv').config();
 // connect db
 db();
 
-// perser
+// parser
 app.use(cookieParser());
 app.use(express.json());
 
 // router
 app.use('/api/v1/', productRoute);
+app.use('/api/v1/', userRoute);
 
 const port = process.env.PORT || 5000;
 

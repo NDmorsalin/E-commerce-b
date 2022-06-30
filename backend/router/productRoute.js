@@ -2,7 +2,7 @@ const express = require('express');
 const {
     productValidation,
     productValidationError,
-} = require('../middleware/product/productMiddleware');
+} = require('../middleware/product/productValidation');
 
 const {
     getAllProducts,
