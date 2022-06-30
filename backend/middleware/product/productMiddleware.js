@@ -11,10 +11,25 @@ const productValidatior = [
   .withMessage('Please Enter product Description')
   .trim(),
   check ('price')
-  .isNumber()
+  .isNumeric()
   .withMessage('Price is only number')
   .isLength({
     max: 8
   })
   .withMessage('price is not more then 8 digits'),
 ]
+
+const productValidatiorError = async (req, res, next)=> {
+  const error = await validationResult(req)
+  const mappedError = error.mapped()
+
+  console.log(mappedError)
+  if (Object.keys(mappedErrors).length === 0) {
+    next()
+  } else {
+    console.log(mappedError)
+    res.status(401).json({
+      error: mappedErrors,
+    });
+  }
+}

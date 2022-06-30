@@ -1,5 +1,5 @@
 const express = require('express');
-const productValidator = require('../middlewair/product/productValidation')
+const productValidator = require('../middleware/product/productMiddleware.js')
 
 const {
     getAllProducts,

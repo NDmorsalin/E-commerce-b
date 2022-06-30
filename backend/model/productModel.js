@@ -48,7 +48,6 @@ const productSchema = mongoose.Schema({
       user: {
         type: mongoose.Schema.ObjectId,
         ref: 'User',
-<<<<<<< HEAD:model/productModel.js
         required: true,
       },
       name: {
@@ -69,9 +68,7 @@ const productSchema = mongoose.Schema({
       type: mongoose.Schema.ObjectId,
       ref: 'User',
       required: true,
-=======
         // required: true,
->>>>>>> 8dce0712d67be75484cad5895deb7fc68bed89b2:backend/model/productModel.js
     },
     createdAt: {
       type: Date,
