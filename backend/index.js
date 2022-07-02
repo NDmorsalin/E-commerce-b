@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const productRoute = require('./router/productRoute');
 const userRoute = require('./router/userRoute');
 const db = require('./DB/db');
+const { notFoundError, defaultError } = require('./middleware/common/errorHandler');
 
 const app = express();
 // environment variables
@@ -13,12 +14,17 @@ require('dotenv').config();
 db();
 
 // parser
-app.use(cookieParser());
+app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(express.json());
 
 // router
 app.use('/api/v1/', productRoute);
 app.use('/api/v1/', userRoute);
+// not found page
+app.use(notFoundError);
+
+// Default error
+app.use(defaultError);
 
 const port = process.env.PORT || 5000;
 

@@ -2,10 +2,13 @@
 // external dependency
 // const mongoose= require('mongoose')
 const Product = require('../../model/productModel');
+const ApiFeature = require('../../utils/apiFeature');
 
 const getAllProducts = async (req, res, next) => {
     try {
-        const product = await Product.find();
+        const apiFeature = new ApiFeature(Product, req.query).search().filter();
+
+        const product = await apiFeature.query;
         res.status(300).json({
             status: 'success',
             product,
@@ -82,6 +85,13 @@ const updateProduct = async (req, res, next) => {
             },
             { new: true }
         );
+
+        if (!updatedProduct) {
+            res.status(404).json({
+                status: 'Product not found',
+            });
+        }
+
         res.status(300).json({
             status: 'success',
             updatedProduct,

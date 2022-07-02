@@ -2,6 +2,7 @@
 // external dependency
 // const mongoose= require('mongoose')
 const bcrypt = require('bcrypt');
+const generateCookie = require('../../lib/generateCookie');
 const User = require('../../model/userModel');
 
 const getAllUser = async (req, res, next) => {
@@ -59,12 +60,17 @@ const addNewUser = async (req, res, next) => {
             password: hashPassword,
         });
 
-        await User.save();
+        // generate Cookie
+        generateCookie('user', userObj, res);
+
+        await user.save();
+
         res.status(300).json({
             status: 'success',
-            User,
+            user,
         });
     } catch (error) {
+        console.log(error);
         res.status(500).json({
             error: {
                 common: {
@@ -84,14 +90,14 @@ const updateUser = async (req, res, next) => {
             {
                 $set: {
                     name: req.body.name,
-                    description: req.body.description,
-                    category: req.body.category,
-                    price: req.body.price,
-                    images: req.body.images,
+                    email: req.body.email,
+                    avatar: req.body.avatar,
+                    role: req.body.role,
                 },
             },
             { new: true }
         );
+        console.log(updatedUser);
         res.status(300).json({
             status: 'success',
             updatedUser,
