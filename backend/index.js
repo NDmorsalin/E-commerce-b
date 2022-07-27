@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser');
 // internal route
 const productRoute = require('./router/productRoute');
 const userRoute = require('./router/userRoute');
+const orderRoute = require('./router/orderRoute');
 const db = require('./DB/db');
 const { notFoundError, defaultError } = require('./middleware/common/errorHandler');
 
@@ -20,6 +21,7 @@ app.use(express.json());
 // router
 app.use('/api/v1/', productRoute);
 app.use('/api/v1/', userRoute);
+app.use('/api/v1/', orderRoute);
 // not found page
 app.use(notFoundError);
 

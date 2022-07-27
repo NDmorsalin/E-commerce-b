@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const createError = require('http-errors');
 
 const notFoundError = (req, res, next) => {
@@ -6,8 +7,13 @@ const notFoundError = (req, res, next) => {
 
 const defaultError = (err, req, res, next) => {
     console.log(err);
-    res.json({
-        error: err,
+
+    res.status(err.status).json({
+        error: {
+            common: {
+                msg: err.message,
+            },
+        },
         errUrl: req.originalUrl,
     });
 };

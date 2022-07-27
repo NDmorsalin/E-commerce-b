@@ -4,19 +4,41 @@ const { userValidation, userValidationError } = require('../middleware/user/user
 const {
     getAllUser,
     getSingleUser,
-    addNewUser,
-    updateUser,
-    deleteSingleUser,
+    getUserDetails,
+    register,
+    login,
+    forgetPassword,
+    resetPassword,
+    logout,
+    updatePassword,
+    updateProfile,
+    deleteUser,
+    updateUserProfile,
 } = require('../controller/routeController/userController');
+const { isAuthentic, authenticateRole } = require('../middleware/common/auth');
 
 const route = express.Router();
 
-route.get('/user', getAllUser);
-route.get('/user/:id', getSingleUser);
+route.post('/register', userValidation, userValidationError, register);
 
-// Admin
-route.post('/user/', userValidation, userValidationError, addNewUser);
-route.put('/user/:id', updateUser);
-route.delete('/user/:id', deleteSingleUser);
+route.post('/login', login);
+
+route.post('/password/forget', forgetPassword);
+
+route.put('/password/reset/:token', resetPassword);
+
+route.get('/me', isAuthentic, getUserDetails);
+
+route.put('/password/update', isAuthentic, updatePassword);
+
+route.put('/me/update', isAuthentic, updateProfile);
+
+route.get('/logout', logout);
+
+// admin
+route.get('/admin/user', isAuthentic, authenticateRole('admin'), getAllUser);
+route.get('/admin/user/:id', isAuthentic, authenticateRole('admin'), getSingleUser);
+route.put('/admin/user/:id', isAuthentic, authenticateRole('admin'), updateUserProfile);
+route.delete('/admin/user/:id', isAuthentic, authenticateRole('admin'), deleteUser);
 
 module.exports = route;

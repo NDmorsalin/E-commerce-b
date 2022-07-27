@@ -4,7 +4,7 @@
   "editor.formatOnSave": true,
   "[javascript]": {
     "editor.formatOnSave": false,
-    "editor.defaultFormatter": null
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true,
