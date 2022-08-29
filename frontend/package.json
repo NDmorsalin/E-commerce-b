@@ -1,0 +1,75 @@
+{
+    "name": "frontend",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+        "@redux-devtools/extension": "^3.2.2",
+        "@reduxjs/toolkit": "^1.8.3",
+        "@splidejs/react-splide": "^0.7.8",
+        "@testing-library/jest-dom": "^5.16.4",
+        "@testing-library/react": "^13.3.0",
+        "@testing-library/user-event": "^13.5.0",
+        "axios": "^0.27.2",
+        "overlay-navbar": "^1.2.3",
+        "pure-react-carousel": "^1.29.0",
+        "react": "^18.2.0",
+        "react-alert": "^7.0.3",
+        "react-alert-template-basic": "^1.0.2",
+        "react-dom": "^18.2.0",
+        "react-helmet": "^6.1.0",
+        "react-icons": "^4.4.0",
+        "react-js-pagination": "^3.0.3",
+        "react-rating-stars-component": "^2.2.0",
+        "react-redux": "^8.0.2",
+        "react-router-dom": "6",
+        "react-scripts": "5.0.1",
+        "redux": "^4.2.0",
+        "redux-thunk": "^2.4.1",
+        "web-vitals": "^2.1.4"
+    },
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test",
+        "eject": "react-scripts eject",
+        "lint-d": "yarn add -D prettier && yarn add -D babel-eslint && npx install-peerdeps --dev eslint-config-airbnb && yarn add -D eslint-config-prettier eslint-plugin-prettier && yarn add -D eslint-config-node && yarn add -D eslint-plugin-node && yarn add -D husky && yarn add -D lint-staged"
+    },
+    "eslintConfig": {
+        "extends": [
+            "react-app",
+            "react-app/jest"
+        ]
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "devDependencies": {
+        "autoprefixer": "^10.4.8",
+        "babel-eslint": "^10.1.0",
+        "eslint": "^8.2.0",
+        "eslint-config-airbnb": "19.0.4",
+        "eslint-config-node": "^4.1.0",
+        "eslint-config-prettier": "^8.5.0",
+        "eslint-plugin-import": "^2.25.3",
+        "eslint-plugin-jsx-a11y": "^6.5.1",
+        "eslint-plugin-node": "^11.1.0",
+        "eslint-plugin-prettier": "^4.2.1",
+        "eslint-plugin-react": "^7.28.0",
+        "eslint-plugin-react-hooks": "^4.3.0",
+        "husky": "^8.0.1",
+        "lint-staged": "^13.0.3",
+        "postcss": "^8.4.14",
+        "prettier": "^2.7.1",
+        "tailwindcss": "^3.1.7"
+    },
+    "proxy": "http://localhost:4000/"
+}

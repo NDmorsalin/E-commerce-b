@@ -14,6 +14,7 @@ const {
     updateProfile,
     deleteUser,
     updateUserProfile,
+    getReviewedUser,
 } = require('../controller/routeController/userController');
 const { isAuthentic, authenticateRole } = require('../middleware/common/auth');
 
@@ -34,6 +35,9 @@ route.put('/password/update', isAuthentic, updatePassword);
 route.put('/me/update', isAuthentic, updateProfile);
 
 route.get('/logout', logout);
+
+// reviews
+route.get('/review/user/:id', getReviewedUser);
 
 // admin
 route.get('/admin/user', isAuthentic, authenticateRole('admin'), getAllUser);

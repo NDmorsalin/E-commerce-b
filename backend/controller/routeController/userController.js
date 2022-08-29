@@ -6,6 +6,7 @@
 const bcrypt = require('bcrypt');
 const createHttpError = require('http-errors');
 const crypto = require('crypto');
+const cloudinary = require('cloudinary');
 const generateCookie = require('../../lib/generateCookie');
 const catchAsyncError = require('../../middleware/common/catchAsyncError');
 const User = require('../../model/userModel');
@@ -19,14 +20,19 @@ const getUserDetails = catchAsyncError(async (req, res, next) => {
 });
 
 const register = catchAsyncError(async (req, res, next) => {
+    const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
+        folder: 'avatars',
+        crop: 'scale',
+    });
+    console.log(myCloud);
     // hash password
     const hashPassword = await bcrypt.hash(req.body.password, 10);
 
     const userObj = {
         ...req.body,
         avatar: {
-            public_id: 'feck id',
-            url: 'feck url',
+            public_id: myCloud.public_id,
+            url: myCloud.secure_url,
         },
     };
     // create user
@@ -40,11 +46,12 @@ const register = catchAsyncError(async (req, res, next) => {
 
     await user.save();
 
-    res.status(300).json({
+    res.status(200).json({
         status: 'success',
         user,
     });
 });
+
 // Login
 const login = catchAsyncError(async (req, res, next) => {
     const { email, password } = req.body;
@@ -194,6 +201,19 @@ const updateProfile = catchAsyncError(async (req, res, next) => {
     });
 });
 
+// getReviewedUser
+const getReviewedUser = catchAsyncError(async (req, res, next) => {
+    const { id } = req.params;
+
+    const user = await User.findById(id).select('avatar');
+
+    console.log(user);
+    res.status(200).json({
+        status: 'success',
+        user,
+    });
+});
+
 // Get all user (Admin)
 const getAllUser = catchAsyncError(async (req, res, next) => {
     const allUser = await User.find();
@@ -226,6 +246,7 @@ const updateUserProfile = catchAsyncError(async (req, res, next) => {
                 name: req.body.name,
                 email: req.body.email,
                 role: req.body.role,
+                avatar: req.body.avatar,
             },
         },
         { new: true }
@@ -258,6 +279,7 @@ const deleteUser = catchAsyncError(async (req, res, next) => {
 module.exports = {
     getAllUser,
     getUserDetails,
+    getReviewedUser,
     register,
     login,
     forgetPassword,

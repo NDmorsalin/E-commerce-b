@@ -19,23 +19,24 @@ const { isAuthentic, authenticateRole } = require('../middleware/common/auth');
 
 const route = express.Router();
 
-route.get('/product', getAllProducts);
+route.get('/products', getAllProducts);
 route.get('/product/:id', getSingleProduct);
 
 // Admin
 route.post(
-    '/product/',
+    '/admin/product/',
     isAuthentic,
     authenticateRole('admin'),
     productValidation,
     productValidationError,
     addNewProduct
 );
-route.put('/product/:id', isAuthentic, authenticateRole('admin'), updateProduct);
+
+route.put('/admin/product/:id', isAuthentic, authenticateRole('admin'), updateProduct);
 route.put('/review', isAuthentic, createProductsReview);
 route.get('/review', isAuthentic, getAllReview);
 route.delete('/review', isAuthentic, deleteReview);
-route.delete('/product/:id', isAuthentic, authenticateRole('admin'), deleteSingleProduct);
-route.delete('/product', isAuthentic, authenticateRole('admin'), deleteAllProduct);
+route.delete('/admin/product/:id', isAuthentic, authenticateRole('admin'), deleteSingleProduct);
+route.delete('/admin/product', isAuthentic, authenticateRole('admin'), deleteAllProduct);
 
 module.exports = route;

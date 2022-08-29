@@ -1,0 +1,32 @@
+{
+    "extends": [
+      "airbnb",
+      "airbnb/hooks",
+      "eslint:recommended",
+      "plugin:jsx-a11y/recommended",
+      "react-app",
+      "plugin:prettier/recommended"
+    ],
+    "env": {
+      "browser": true,
+      "node": true,
+      "es6": true,
+      "jest": true
+    },
+    "plugins": ["prettier", "react", "react-hooks"],
+    "rules": {
+      "prettier/prettier": "error",
+      "no-unused-vars": "warn",
+      "no-console": "off",
+      "func-names": "off",
+      "no-process-exit": "off",
+      "object-shorthand": "off",
+      "class-methods-use-this": "off",
+      "react/prop-types": 0,
+      "react/state-in-constructor": 0,
+      "react/prefer-stateless-function": 0,
+      "react/react-in-jsx-scope": 0,
+      "react/jsx-no-bind": 0,
+      "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+    }
+  }

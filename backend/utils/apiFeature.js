@@ -31,5 +31,14 @@ class ApiFeature {
 
         return this;
     }
+
+    pagination(resultPerPage) {
+        const currentPage = parseInt(this.queryStr.page, 10) || 1;
+
+        const skip = resultPerPage * (currentPage - 1);
+
+        this.query = this.query.limit(resultPerPage).skip(skip);
+        return this;
+    }
 }
 module.exports = ApiFeature;

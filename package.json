@@ -12,9 +12,13 @@
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "body-parser": "^1.20.0",
+    "cloudinary": "^1.31.0",
     "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
+    "express-fileupload": "^1.4.0",
     "express-validator": "^6.14.2",
     "http-errors": "^2.0.0",
     "jsonwebtoken": "^8.5.1",
@@ -28,5 +32,6 @@
     "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-prettier": "^4.1.0",
     "prettier": "^2.7.1"
-  }
+  },
+  "proxy": "http://192.168.207.129:4000"
 }
