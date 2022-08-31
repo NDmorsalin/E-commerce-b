@@ -12,7 +12,7 @@ const isAuthentic = catchAsyncError(async (req, res, next) => {
     }
     const { id } = jwt.verify(token, process.env.JWT_SECRET);
 
-    const user = await User.findById(id);
+    const user = await User.findById(id).select('-password');
 
     if (!user) {
         next(createHttpError(402, 'User not found please registration again'));
